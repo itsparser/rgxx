@@ -2,7 +2,7 @@ use pyo3::{pyclass, PyErr, pymethods, PyResult};
 
 use crate::v1::part::RegexPart;
 
-#[pyclass(name = "RGXX")]
+#[pyclass]
 pub struct RegExp {
     pub pattern: String,
 }

@@ -16,6 +16,7 @@ pub fn escape_special_characters(s: &str) -> String {
     escaped
 }
 
+/// digit - Matches any single digit (`\d`).
 #[pyfunction]
 pub fn digit() -> RegexPart {
     RegexPart {
@@ -23,6 +24,7 @@ pub fn digit() -> RegexPart {
     }
 }
 
+/// exactly - Matches the exact string `s`, escaping special regex characters.
 #[pyfunction]
 pub fn exactly(s: &str) -> RegexPart {
     RegexPart {
@@ -30,6 +32,7 @@ pub fn exactly(s: &str) -> RegexPart {
     }
 }
 
+/// any_of - Matches any one of the provided patterns.
 #[pyfunction]
 #[pyo3(signature = (*parts))]
 pub fn any_of(parts: Vec<RegexPart>) -> PyResult<RegexPart> {
@@ -40,4 +43,21 @@ pub fn any_of(parts: Vec<RegexPart>) -> PyResult<RegexPart> {
     Ok(RegexPart {
         pattern: format!("({})", patterns.join("|")),
     })
+}
+
+
+/// alfanumeric - Matches any alphanumeric character.
+#[pyfunction]
+pub fn alfanumeric() -> RegexPart {
+    RegexPart {
+        pattern: r"\w".to_string(),
+    }
+}
+
+/// alphabetic - Matches any alphabetic character.
+#[pyfunction]
+pub fn alphabetic() -> RegexPart {
+    RegexPart {
+        pattern: r"([a-zA-Z])".to_string(),
+    }
 }

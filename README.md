@@ -31,7 +31,7 @@ python
 Copy code
 
 ```python
-from natural_language_regex import digit, exactly, any_of, RegExp 
+from rgxx import digit, exactly, any_of, RegExp 
 
 
 # Define the components of the date pattern 

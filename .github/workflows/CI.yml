@@ -42,6 +42,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
+          command: build
           args: --release --out dist --find-interpreter
           sccache: 'true'
           manylinux: auto

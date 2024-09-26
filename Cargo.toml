@@ -1,0 +1,16 @@
+[package]
+name = "regx"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+#[features]
+#pybindings = ["pyo3"]
+#jsbindings = ["wasm-bindgen"]
+
+
+[dependencies]
+pyo3 = { version = "0.22.3", features = ["extension-module"] }
+#wasm-bindgen = { version = "0.2.93", optional = true }

@@ -11,7 +11,7 @@ use crate::v1::utils::{digit, exactly, any_of};
 
 
 #[pymodule]
-fn regx(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn rgxx(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RegexPart>()?;
     m.add_class::<RegExp>()?;
     m.add_function(wrap_pyfunction!(digit, m)?)?;

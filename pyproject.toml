@@ -1,0 +1,111 @@
+[build-system]
+requires = [
+    'maturin>=1,<2',
+    'typing-extensions >=4.6.0,!=4.7.0'
+]
+build-backend = 'maturin'
+
+[project]
+name = 'rgxx'
+description = "Regular expressions by using a natural language syntax"
+requires-python = '>=3.9'
+authors = [
+    {name = 'Vasanth Kumar Kalaiselvan', email = 'itsparser@gmail.com'}
+]
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Programming Language :: Rust',
+    'Framework :: RGXX',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Information Technology',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: MacOS',
+    'Typing :: Typed',
+]
+dependencies = [
+    'typing-extensions >=4.6.0,!=4.7.0'
+]
+dynamic = [
+    'description',
+    'license',
+    'readme',
+    'version'
+]
+
+[project.urls]
+Homepage = 'https://github.com/itsparser/rgxx'
+Documentation = 'https://github.com/itsparser/rgxx'
+Changelog = 'https://github.com/itsparser/rgxx/blob/main/CHANGELOG.md'
+Repository = 'https://github.com/itsparser/rgxx'
+
+[tool.maturin]
+python-source = "python"
+module-name = "rgxx"
+bindings = 'pyo3'
+features = ["pyo3/extension-module"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ['Q', 'RUF100', 'C90', 'I']
+extend-ignore = [
+    'E721',  # using type() instead of isinstance() - we use this in tests
+]
+flake8-quotes = {inline-quotes = 'single', multiline-quotes = 'double'}
+mccabe = { max-complexity = 13 }
+isort = { known-first-party = ['pydantic_core', 'tests'] }
+
+[tool.ruff.format]
+quote-style = 'single'
+
+[tool.pytest.ini_options]
+testpaths = 'tests'
+log_format = '%(name)s %(levelname)s: %(message)s'
+filterwarnings = [
+    'error',
+    # Python 3.9 and below allowed truncation of float to integers in some
+    # cases, by not making this an error we can test for this behaviour
+    'ignore:(.+)Implicit conversion to integers using __int__ is deprecated',
+]
+timeout = 30
+xfail_strict = true
+# min, max, mean, stddev, median, iqr, outliers, ops, rounds, iterations
+addopts = [
+    '--benchmark-columns', 'min,mean,stddev,outliers,rounds,iterations',
+    '--benchmark-group-by', 'group',
+    '--benchmark-warmup', 'on',
+    '--benchmark-disable',  # this is enable by `make benchmark` when you actually want to run benchmarks
+]
+
+[tool.coverage.run]
+source = ['rgxx']
+branch = true
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if TYPE_CHECKING:',
+    '@overload',
+]
+
+
+[tool.hooky]
+reviewers = ['sydney-runkle', 'davidhewitt']
+require_change_file = false
+
+[tool.pyright]
+include = ['rgxx', 'tests/test_typing.py']
+reportUnnecessaryTypeIgnoreComment = true

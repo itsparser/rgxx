@@ -135,7 +135,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "regx"
+name = "rgxx"
 version = "0.1.0"
 dependencies = [
  "pyo3",

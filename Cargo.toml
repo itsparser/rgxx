@@ -1,13 +1,25 @@
-[package]
+[workspace]
 name = "rgxx"
+members = [
+    "libs/rgx",
+    "libs/pyrgx",
+    "libs/jsrgx",
+]
+
+[workspace.package]
 version = "0.1.12"
 edition = "2021"
+description = "RGX - Natural Language Regex Generator Expression for Rust"
+authors = ["Vasanth Kumar <itsparser@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+documentation = "https://docs.rs/rgxx/"
+homepage = "https://github.com/itsparser/rgxx"
+repository = "https://github.com/itsparser/rgxx"
+rust-version = "1.74.1"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-[lib]
-name = "rgxx"
-crate-type = ["cdylib"]
 
-[dependencies]
-#pyo3 = "0.22.0"
-pyo3 = { version = "0.22.3", features = ["extension-module", "abi3-py39"] }
+
+[workspace.dependencies]
+thiserror = "1.0.64"
+rgx = { path = "libs/rgx", default-features = true  }

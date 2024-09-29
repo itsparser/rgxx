@@ -9,7 +9,7 @@ name = "rgxx"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = "0.22.0"
+pyo3 = { version = "0.22.3", features = ["extension-module", "abi3-py39"] }
 rgx.workspace = true
 
 [features]

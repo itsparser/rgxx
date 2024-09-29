@@ -1,10 +1,34 @@
 use pyo3::{pyclass, pymethods};
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
-use rgx::Part;
+use rgx::{Part, RegExp};
 
-// Python bindings
-#[pyclass]
+#[pyclass(name = "RegExp")]
+#[derive(Clone)]
+pub struct PyRegExp {
+    rx: RegExp,
+}
+impl PyRegExp {
+    pub fn new(parts: Vec<PyPart>) -> Result<Self, RgxError> {
+        let patterns: Result<Vec<Part>, RgxError> = parts.into_iter()
+            .map(|part| Ok(part.inner))
+            .collect();
+        let patterns = patterns?;
+        Ok(Self {
+            rx: RegExp::new(patterns)?,
+        })
+    }
+    pub fn compile(&self) -> String {
+        self.rx.pattern.clone()
+    }
+    pub fn __repr__(&self) -> String {
+        format!("RegExp({})", self.rx.pattern)
+    }
+}
+
+
+
+#[pyclass(name = "Part")]
 #[derive(Clone)]
 pub struct PyPart {
     pub inner: Part,
@@ -87,3 +111,15 @@ impl PyPart {
         format!("PyPart({})", self.inner.pattern)
     }
 }
+
+use pyo3::prelude::*;
+use pyo3::types::PyModule;
+use rgx::error::RgxError;
+
+#[pymodule]
+fn rgxx(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<PyPart>()?;
+    m.add_class::<PyRegExp>()?;
+    Ok(())
+}
+

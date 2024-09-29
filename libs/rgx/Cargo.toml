@@ -1,0 +1,15 @@
+[package]
+name = "rgx"
+description = "RGX - Natural Language Regex Generator Expression for Rust"
+readme.workspace = true
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+documentation.workspace = true
+homepage.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thiserror.workspace = true

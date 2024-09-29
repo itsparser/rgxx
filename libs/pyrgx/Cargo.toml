@@ -1,0 +1,17 @@
+[package]
+name = "pyrgx"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rgxx"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.22.0"
+rgx.workspace = true
+
+[features]
+python =[]
+default = ["pyo3/extension-module", "python"]

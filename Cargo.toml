@@ -1,13 +1,14 @@
 [workspace]
-name = "rgxx"
 members = [
     "libs/rgx",
     "libs/pyrgx",
     "libs/jsrgx",
 ]
+resolver = "2"
 
 [workspace.package]
-version = "0.1.21"
+name = "rgxx"
+version = "0.1.22"
 edition = "2021"
 description = "RGX - Natural Language Regex Generator Expression for Rust"
 authors = ["Vasanth Kumar <itsparser@gmail.com>"]
